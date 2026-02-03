@@ -204,8 +204,7 @@ const App: React.FC = () => {
       setCaptureSoldiers(weekBirthdaysFiltered);
       setCaptureSoldier(null);
 
-      // Increase timeout to 2500ms to allow fonts/images to load on Vercel
-      await new Promise(resolve => setTimeout(resolve, 2500));
+      await new Promise(resolve => setTimeout(resolve, 500));
 
       if (captureRef.current) {
           try {
@@ -242,8 +241,7 @@ const App: React.FC = () => {
       setCaptureSoldiers(monthBirthdaysFiltered);
       setCaptureSoldier(null);
 
-      // Increase timeout to 2500ms
-      await new Promise(resolve => setTimeout(resolve, 2500));
+      await new Promise(resolve => setTimeout(resolve, 500));
 
       if (captureRef.current) {
           try {
@@ -279,8 +277,8 @@ const App: React.FC = () => {
     setCaptureSoldier(soldier);
     setCaptureSoldiers([]); 
     
-    // Wait for render - 2500ms for safety on production
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    // Wait for render
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     if (captureRef.current) {
         try {
@@ -339,8 +337,7 @@ const App: React.FC = () => {
         setCaptureSoldier(soldier);
         
         // Wait for React to render the new soldier into the hidden DOM
-        // Increased timeout for email generation as well
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 400));
 
         if (captureRef.current) {
             try {

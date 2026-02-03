@@ -28,45 +28,45 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
   // Dynamic scaling based on count to ensure content fits
   const getScaleClasses = () => {
       if (!isCollective) return {
-          nameSize: 'text-2xl', // Reduced from 3xl to prevent wrap/overflow
+          nameSize: 'text-3xl',
           listSpacing: '',
-          headerMb: 'mb-4', // Reduced from 8
-          messageSize: 'text-lg', // Reduced from xl
-          messageSpacing: 'space-y-4', // Reduced from 6
-          sectionMargin: 'mb-4', // Reduced from 6
-          footerMargin: 'mt-2', // Reduced from 6
-          footerPb: 'pb-16' // Drastically reduced from pb-32 to prevent overlap
+          headerMb: 'mb-6',
+          messageSize: 'text-xl',
+          messageSpacing: 'space-y-6',
+          sectionMargin: 'mb-6',
+          footerMargin: 'mt-6',
+          footerPb: 'pb-32'
       };
 
       if (count > 12) return {
           nameSize: 'text-xs',
           listSpacing: 'space-y-0.5',
           headerMb: 'mb-2',
-          messageSize: 'text-xs',
+          messageSize: 'text-sm',
           messageSpacing: 'space-y-1',
           sectionMargin: 'mb-2',
           footerMargin: 'mt-1',
-          footerPb: 'pb-12'
+          footerPb: 'pb-20'
       };
       if (count > 8) return {
           nameSize: 'text-sm',
           listSpacing: 'space-y-1',
           headerMb: 'mb-2',
-          messageSize: 'text-sm',
+          messageSize: 'text-base',
           messageSpacing: 'space-y-2',
           sectionMargin: 'mb-2',
           footerMargin: 'mt-2',
-          footerPb: 'pb-14'
+          footerPb: 'pb-24'
       };
       if (count > 5) return {
           nameSize: 'text-base',
           listSpacing: 'space-y-1',
-          headerMb: 'mb-4',
+          headerMb: 'mb-3',
           messageSize: 'text-base',
           messageSpacing: 'space-y-3',
           sectionMargin: 'mb-3',
           footerMargin: 'mt-4',
-          footerPb: 'pb-16'
+          footerPb: 'pb-24'
       };
       // Default collective (1-5 people)
       return {
@@ -77,7 +77,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSpacing: 'space-y-4',
           sectionMargin: 'mb-4',
           footerMargin: 'mt-4',
-          footerPb: 'pb-20'
+          footerPb: 'pb-28'
       };
   };
 
@@ -112,26 +112,25 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
       <div className="relative z-10 h-full flex flex-col p-12">
         {/* Header - Fixed Height Area to prevent Logo Cutoff */}
         <div className="flex justify-between items-start mb-4 h-28 shrink-0">
-          {/* Adjusted Layout to fix overlap - Removed negative tracking and increased line-height stability */}
-          <div className="flex flex-col pt-0 -mt-6">
-            <h1 className="text-8xl font-black text-cbmmg-orange tracking-normal leading-tight mb-2">FELIZ</h1>
-            <h2 className="text-3xl font-bold text-gray-500 tracking-wide ml-1">ANIVERSÁRIO</h2>
+          {/* Adjusted Layout to fix overlap - Moved higher up (-mt-12) and added margin bottom (mb-3) */}
+          <div className="flex flex-col pt-0 -mt-8">
+            <h1 className="text-8xl font-black text-cbmmg-orange tracking-tighter leading-none mb-3">FELIZ</h1>
+            <h2 className="text-3xl font-bold text-gray-500 tracking-[0.2em] ml-1">ANIVERSÁRIO</h2>
           </div>
           <div className="flex gap-4 items-start pr-2">
-             {/* 6BBM Logo - Using CBMMG logo as fallback for 6BBM to ensure it appears */}
-             <div className="w-20 flex flex-col items-center justify-center mt-1">
+             {/* 6BBM Logo - Adjusted to mt-2 to raise it slightly */}
+             <div className="w-20 flex justify-center mt-2">
                 <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/a/af/Bras%C3%A3o_do_CBMMG.png"
-                    alt="Brasão CBMMG"
-                    className="w-full h-auto object-contain drop-shadow-sm opacity-90"
+                    src="https://lh3.googleusercontent.com/pw/AP1GczOz2AhM552qAgdmxiIOyRGmSjpy4CB-NXjG8hi4lrNw7qPO3nvnN2-tBgf_rC2BZ9eRLdT4RMZao6KYQH2491BiXKZTYg2P7dG40u6QFD34WFRxzrBKDPRBDC86-z5kToRz1UtxVhrADJxoQo4ysL1_=w487-h512-s-no-gm?authuser=0"
+                    alt="Brasão 6º BBM"
+                    className="w-full h-auto object-contain drop-shadow-sm"
                     crossOrigin="anonymous" 
                 />
-                <span className="text-[10px] font-bold text-gray-500 mt-1 text-center leading-none">1ª Cia Op</span>
              </div>
-             {/* CBMMG Round Logo - Stable Wikimedia Source */}
+             {/* CBMMG Round Logo */}
              <div className="w-24 flex justify-center">
                 <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/a/af/Bras%C3%A3o_do_CBMMG.png" 
+                    src="https://images.weserv.nl/?url=www.bombeiros.mg.gov.br/images/logo.png&w=200&output=png" 
                     alt="Logo CBMMG"
                     className="w-full h-auto object-contain drop-shadow-sm"
                     crossOrigin="anonymous"
@@ -140,8 +139,8 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           </div>
         </div>
 
-        {/* Content Container - Flex-1 to take available space */}
-        <div className="flex-1 flex flex-col min-h-0 relative z-20">
+        {/* Content Container - Flex-1 to take available space but allowing shrinkage */}
+        <div className="flex-1 flex flex-col min-h-0">
             {/* Recipient Logic */}
             <div className={`text-left ${styles.headerMb} mt-2 pl-4 border-l-8 border-cbmmg-orange py-2 shrink-0`}>
                 {isCollective ? (
@@ -149,7 +148,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
                         <h3 className={`text-gray-900 font-bold ${styles.headerMb === 'mb-1' ? 'mb-1 text-base' : 'mb-2 text-xl'}`}>Prezados (as),</h3>
                         <div className={`${styles.listSpacing}`}>
                             {soldiers!.map((s, index) => (
-                                <p key={s.id || index} className={`${styles.nameSize} text-gray-800 leading-snug`}>
+                                <p key={s.id || index} className={`${styles.nameSize} text-gray-800 leading-tight`}>
                                     <span className="font-bold">{s.rank} {s.name}</span>
                                     <span className="text-gray-600 ml-2 opacity-80 text-[0.9em]">
                                         – {s.birthDate.split('-').reverse().slice(0,2).join('/')}
@@ -159,14 +158,14 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
                         </div>
                     </>
                 ) : (
-                    <h3 className="text-3xl text-gray-800 leading-normal">
+                    <h3 className="text-3xl text-gray-800 leading-snug">
                         Prezado(a) <span className="font-bold text-gray-900 block mt-2">{soldier!.rank} {soldier!.name}</span>
                     </h3>
                 )}
             </div>
 
-            {/* Message Body - Using mt-0 instead of mt-auto to avoid pushing footer too hard if space is tight */}
-            <div className={`${styles.messageSpacing} ${styles.messageSize} ${styles.sectionMargin} text-gray-700 text-justify leading-relaxed font-light px-2 pr-4 pt-4`}>
+            {/* Message Body - Adjusted grammar for plural if collective */}
+            <div className={`${styles.messageSpacing} ${styles.messageSize} ${styles.sectionMargin} text-gray-700 text-justify leading-relaxed font-light px-2 pr-4 mt-auto`}>
                 <p>
                     O Comandante da 1ª Cia. Operacional, os Oficiais e as Praças {isCollective ? 'parabenizam-nos' : 'parabenizam-no'} pela passagem de seu aniversário, {isCollective ? 'desejando-lhes' : 'desejando-lhe'} os mais sinceros votos de paz, saúde, felicidades e sucesso.
                 </p>
@@ -176,9 +175,9 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
             </div>
         </div>
 
-        {/* Footer Section */}
-        {/* Adjusted Z-index and margins to ensure no overlap */}
-        <div className={`shrink-0 z-30 ${styles.footerPb} ${styles.footerMargin} relative`}>
+        {/* Footer Section - Wrapper to control position */}
+        {/* Adjusted padding-bottom based on count to optimize space */}
+        <div className={`shrink-0 z-20 ${styles.footerPb} ${styles.footerMargin}`}>
             {/* Footer Greetings */}
             <div className="text-center px-4 mb-4">
                 <p className={`${count > 8 ? 'text-base' : 'text-xl'} font-bold text-cbmmg-orange tracking-wide leading-tight`}>
@@ -188,15 +187,15 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
 
             {/* Date and Signature */}
             <div className="flex flex-col items-center text-center">
-                <p className={`${count > 8 ? 'text-xs' : 'text-sm'} text-gray-600 mb-4 font-medium italic`}>
+                <p className={`${count > 8 ? 'text-sm' : 'text-base'} text-gray-600 mb-3 font-medium italic`}>
                     Governador Valadares, {currentDate}.
                 </p>
 
                 <div className="text-center pt-2 px-12 inline-block min-w-[300px] relative">
                     {/* Signature Line */}
                     <div className="absolute top-0 left-4 right-4 h-0.5 bg-gray-400"></div>
-                    <p className={`${count > 8 ? 'text-sm' : 'text-lg'} font-bold text-gray-900 mt-2 leading-tight`}>{commanderName}, {commanderRank}</p>
-                    <p className={`${count > 8 ? 'text-xs' : 'text-sm'} text-gray-600 font-medium`}>Comandante da 1ª Cia. Operacional</p>
+                    <p className={`${count > 8 ? 'text-base' : 'text-lg'} font-bold text-gray-900 mt-2`}>{commanderName}, {commanderRank}</p>
+                    <p className={`${count > 8 ? 'text-sm' : 'text-base'} text-gray-600 font-medium`}>Comandante da 1ª Cia. Operacional</p>
                 </div>
             </div>
         </div>
