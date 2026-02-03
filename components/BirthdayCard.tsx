@@ -180,7 +180,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
         <div className={`shrink-0 z-20 ${styles.footerPb} ${styles.footerMargin}`}>
             {/* Footer Greetings */}
             <div className="text-center px-4 mb-4">
-                <p className={`${count > 8 ? 'text-base' : 'text-xl'} font-bold text-cbmmg-orange tracking-wide leading-tight`}>
+                <p className={`${count > 8 ? 'text-base' : 'text-xl'} font-bold text-cbmmg-orange tracking-wide leading-tight whitespace-nowrap`}>
                     São os votos do Corpo de Bombeiros Militar de Minas Gerais.
                 </p>
             </div>
