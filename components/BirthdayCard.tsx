@@ -35,7 +35,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSpacing: 'space-y-6',
           sectionMargin: 'mb-6',
           footerMargin: 'mt-6',
-          footerPb: 'pb-32'
+          footerPb: 'pb-20'
       };
 
       if (count > 12) return {
@@ -83,11 +83,25 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
 
   const styles = getScaleClasses();
 
+  // URLs das imagens com Proxy Seguro e Codificação
+  const LOGO_6BBM_ORIGINAL = "https://lh3.googleusercontent.com/pw/AP1GczOz2AhM552qAgdmxiIOyRGmSjpy4CB-NXjG8hi4lrNw7qPO3nvnN2-tBgf_rC2BZ9eRLdT4RMZao6KYQH2491BiXKZTYg2P7dG40u6QFD34WFRxzrBKDPRBDC86-z5kToRz1UtxVhrADJxoQo4ysL1_=w487-h512-s-no-gm?authuser=0";
+  const LOGO_CBMMG_ORIGINAL = "https://www.bombeiros.mg.gov.br/images/logo.png";
+  
+  // Codificação correta para o proxy (Resolve o problema do Vercel/CORS e parâmetros perdidos)
+  const LOGO_6BBM = `https://wsrv.nl/?url=${encodeURIComponent(LOGO_6BBM_ORIGINAL)}&output=png`;
+  const LOGO_CBMMG = `https://wsrv.nl/?url=${encodeURIComponent(LOGO_CBMMG_ORIGINAL)}&w=200&output=png`;
+
   return (
     // FIX: Fixed dimensions (595x842px) are crucial for html2canvas consistency
     <div 
         className={`relative bg-[#F4F1EA] shadow-xl overflow-hidden flex flex-col font-sans ${className}`} 
-        style={{ width: '595px', height: '842px', minWidth: '595px', minHeight: '842px' }}
+        style={{ 
+            width: '595px', 
+            height: '842px', 
+            minWidth: '595px', 
+            minHeight: '842px',
+            fontFamily: 'Roboto, sans-serif' // Forçar fonte explicitamente
+        }}
     >
       {/* Background Geometric Pattern */}
       <div className="absolute right-0 bottom-0 w-full h-full pointer-events-none z-0">
@@ -118,22 +132,24 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
             <h2 className="text-3xl font-bold text-gray-500 tracking-[0.2em] ml-1">ANIVERSÁRIO</h2>
           </div>
           <div className="flex gap-4 items-start pr-2">
-             {/* 6BBM Logo - Adjusted to mt-2 to raise it slightly */}
+             {/* 6BBM Logo - Fixed with proper encoded Proxy */}
              <div className="w-20 flex justify-center mt-2">
                 <img 
-                    src="https://lh3.googleusercontent.com/pw/AP1GczOz2AhM552qAgdmxiIOyRGmSjpy4CB-NXjG8hi4lrNw7qPO3nvnN2-tBgf_rC2BZ9eRLdT4RMZao6KYQH2491BiXKZTYg2P7dG40u6QFD34WFRxzrBKDPRBDC86-z5kToRz1UtxVhrADJxoQo4ysL1_=w487-h512-s-no-gm?authuser=0"
+                    src={LOGO_6BBM}
                     alt="Brasão 6º BBM"
                     className="w-full h-auto object-contain drop-shadow-sm"
                     crossOrigin="anonymous" 
+                    referrerPolicy="no-referrer"
                 />
              </div>
              {/* CBMMG Round Logo */}
              <div className="w-24 flex justify-center">
                 <img 
-                    src="https://images.weserv.nl/?url=www.bombeiros.mg.gov.br/images/logo.png&w=200&output=png" 
+                    src={LOGO_CBMMG}
                     alt="Logo CBMMG"
                     className="w-full h-auto object-contain drop-shadow-sm"
                     crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
                 />
              </div>
           </div>
@@ -165,7 +181,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
             </div>
 
             {/* Message Body - Adjusted grammar for plural if collective */}
-            <div className={`${styles.messageSpacing} ${styles.messageSize} ${styles.sectionMargin} text-gray-700 text-justify leading-relaxed font-light px-2 pr-4 mt-auto`}>
+            <div className={`${styles.messageSpacing} ${styles.messageSize} ${styles.sectionMargin} text-gray-700 text-justify leading-relaxed font-light px-2 pr-4 mt-4`}>
                 <p>
                     O Comandante da 1ª Cia. Operacional, os Oficiais e as Praças {isCollective ? 'parabenizam-nos' : 'parabenizam-no'} pela passagem de seu aniversário, {isCollective ? 'desejando-lhes' : 'desejando-lhe'} os mais sinceros votos de paz, saúde, felicidades e sucesso.
                 </p>
