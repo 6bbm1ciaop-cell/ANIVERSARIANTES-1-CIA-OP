@@ -3,7 +3,7 @@ import { Military, ViewMode, FilterState } from './types';
 import { fetchMilitaryData, getBirthdaysByDate, getBirthdaysByMonth, getBirthdaysByWeek, filterSoldiers, getDateForYear, sendEmailViaGoogleScript } from './services/dataService';
 import Sidebar from './components/Sidebar';
 import BirthdayCard from './components/BirthdayCard';
-import { Calendar as CalendarIcon, Search, Mail, Filter, Download, Check, X, RefreshCw, ChevronRight, Zap, Eye, AlertTriangle, AlertCircle, Settings } from 'lucide-react';
+import { Calendar as CalendarIcon, Search, Mail, Filter, Download, Check, X, RefreshCw, ChevronRight, Zap, Eye, AlertTriangle, AlertCircle } from 'lucide-react';
 import html2canvas from 'html2canvas';
 
 // Extracted FilterBar Component
@@ -951,8 +951,17 @@ const App: React.FC = () => {
 };
 
 // Subcomponent for List Items (Same as before)
-const BirthdayListItem = ({ soldier, minimal = false, onClick, onHover }: { soldier: Military, minimal?: boolean, onClick?: () => void, onHover?: (s: Military | null) => void }) => {
-    const [_, month, day] = soldier.birthDate.split('-');
+interface BirthdayListItemProps {
+    soldier: Military;
+    minimal?: boolean;
+    onClick?: () => void;
+    onHover?: (s: Military | null) => void;
+}
+
+const BirthdayListItem: React.FC<BirthdayListItemProps> = ({ soldier, minimal = false, onClick, onHover }) => {
+    // FIX: Using _ to ignore variable usually works, but Typescript in strict mode on Vercel might complain. 
+    // Using empty comma skip is safer.
+    const [, month, day] = soldier.birthDate.split('-');
     
     return (
         <div 
