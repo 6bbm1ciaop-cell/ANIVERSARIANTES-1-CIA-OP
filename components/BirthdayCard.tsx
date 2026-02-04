@@ -27,57 +27,69 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
 
   // Dynamic scaling based on count to ensure content fits
   const getScaleClasses = () => {
+      // Single Soldier
       if (!isCollective) return {
           nameSize: 'text-3xl',
           listSpacing: '',
           headerMb: 'mb-6',
-          messageSize: 'text-xl',
+          messageSize: 'text-lg', // Slightly reduced from xl for safety
           messageSpacing: 'space-y-6',
           sectionMargin: 'mb-6',
           footerMargin: 'mt-2',
-          footerPb: 'pb-24' // Increased padding to lift footer off the bottom graphic
+          footerPb: 'pb-32', // High lift to clear graphic clearly
+          lineHeight: 'leading-normal'
       };
 
+      // Very Large Group (>12)
       if (count > 12) return {
           nameSize: 'text-[10px]',
+          listSpacing: 'space-y-0',
+          headerMb: 'mb-1',
+          messageSize: 'text-[11px]',
+          messageSpacing: 'space-y-1',
+          sectionMargin: 'mb-1',
+          footerMargin: 'mt-1',
+          footerPb: 'pb-24', // Need space for names, can't lift too high, but text is small
+          lineHeight: 'leading-tight'
+      };
+      
+      // Large Group (9-12)
+      if (count > 8) return {
+          nameSize: 'text-xs',
           listSpacing: 'space-y-0.5',
           headerMb: 'mb-2',
-          messageSize: 'text-sm',
-          messageSpacing: 'space-y-1',
-          sectionMargin: 'mb-2',
-          footerMargin: 'mt-1',
-          footerPb: 'pb-16'
-      };
-      if (count > 8) return {
-          nameSize: 'text-sm',
-          listSpacing: 'space-y-1',
-          headerMb: 'mb-2',
-          messageSize: 'text-base',
+          messageSize: 'text-xs',
           messageSpacing: 'space-y-2',
           sectionMargin: 'mb-2',
           footerMargin: 'mt-2',
-          footerPb: 'pb-20'
+          footerPb: 'pb-28', // Lift up
+          lineHeight: 'leading-tight'
       };
+
+      // Medium Group (6-8)
       if (count > 5) return {
-          nameSize: 'text-base',
+          nameSize: 'text-sm',
           listSpacing: 'space-y-1',
-          headerMb: 'mb-3',
+          headerMb: 'mb-2',
+          messageSize: 'text-sm',
+          messageSpacing: 'space-y-2',
+          sectionMargin: 'mb-2',
+          footerMargin: 'mt-2',
+          footerPb: 'pb-28',
+          lineHeight: 'leading-snug'
+      };
+
+      // Small Group (2-5)
+      return {
+          nameSize: 'text-base',
+          listSpacing: 'space-y-1.5',
+          headerMb: 'mb-4',
           messageSize: 'text-base',
           messageSpacing: 'space-y-3',
-          sectionMargin: 'mb-3',
-          footerMargin: 'mt-2',
-          footerPb: 'pb-22'
-      };
-      // Default collective (1-5 people)
-      return {
-          nameSize: 'text-lg',
-          listSpacing: 'space-y-2',
-          headerMb: 'mb-4',
-          messageSize: 'text-lg',
-          messageSpacing: 'space-y-4',
           sectionMargin: 'mb-4',
           footerMargin: 'mt-2',
-          footerPb: 'pb-24'
+          footerPb: 'pb-32', // Safe lift
+          lineHeight: 'leading-snug'
       };
   };
 
@@ -182,7 +194,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
             </div>
 
             {/* Message Body - Adjusted grammar for plural if collective */}
-            <div className={`${styles.messageSpacing} ${styles.messageSize} ${styles.sectionMargin} text-gray-700 text-justify leading-relaxed font-light px-2 pr-4 mt-4 break-words`}>
+            <div className={`${styles.messageSpacing} ${styles.messageSize} ${styles.sectionMargin} ${styles.lineHeight} text-gray-700 text-justify font-light px-2 pr-4 mt-4 break-words`}>
                 <p>
                     O Comandante da 1ª Cia. Operacional, os Oficiais e as Praças {isCollective ? 'parabenizam-nos' : 'parabenizam-no'} pela passagem de seu aniversário, {isCollective ? 'desejando-lhes' : 'desejando-lhe'} os mais sinceros votos de paz, saúde, felicidades e sucesso.
                 </p>
@@ -197,23 +209,23 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
         <div className={`shrink-0 z-20 ${styles.footerPb} ${styles.footerMargin}`}>
             {/* Footer Greetings */}
             <div className="text-center px-4 mb-4">
-                {/* Standard leading to avoid overlap */}
-                <p className={`${count > 8 ? 'text-base' : 'text-xl'} font-bold text-cbmmg-orange tracking-wide`}>
+                {/* Reduced font size slightly to prevent wrapping on Linux/Vercel */}
+                <p className={`${count > 8 ? 'text-sm' : 'text-lg'} font-bold text-cbmmg-orange tracking-wide`}>
                     São os votos do Corpo de Bombeiros Militar de Minas Gerais.
                 </p>
             </div>
 
             {/* Date and Signature */}
             <div className="flex flex-col items-center text-center">
-                <p className={`${count > 8 ? 'text-sm' : 'text-base'} text-gray-600 mb-3 font-medium italic`}>
+                <p className={`${count > 8 ? 'text-xs' : 'text-base'} text-gray-600 mb-3 font-medium italic`}>
                     Governador Valadares, {currentDate}.
                 </p>
 
                 <div className="text-center pt-2 px-12 inline-block min-w-[300px] relative">
                     {/* Signature Line */}
                     <div className="absolute top-0 left-4 right-4 h-0.5 bg-gray-400"></div>
-                    <p className={`${count > 8 ? 'text-base' : 'text-lg'} font-bold text-gray-900 mt-2`}>{commanderName}, {commanderRank}</p>
-                    <p className={`${count > 8 ? 'text-sm' : 'text-base'} text-gray-600 font-medium`}>Comandante da 1ª Cia. Operacional</p>
+                    <p className={`${count > 8 ? 'text-sm' : 'text-lg'} font-bold text-gray-900 mt-2`}>{commanderName}, {commanderRank}</p>
+                    <p className={`${count > 8 ? 'text-xs' : 'text-base'} text-gray-600 font-medium`}>Comandante da 1ª Cia. Operacional</p>
                 </div>
             </div>
         </div>
