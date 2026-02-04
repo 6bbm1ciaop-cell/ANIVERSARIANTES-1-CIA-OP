@@ -31,13 +31,13 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
       if (!isCollective) return {
           nameSize: 'text-3xl',
           listSpacing: '',
-          headerMb: 'mb-4', // Reduced from mb-6 to save space
-          messageSize: 'text-lg', 
-          messageSpacing: 'space-y-4', // Reduced from space-y-6 to save space
-          sectionMargin: 'mb-4', // Reduced from mb-6
-          footerMargin: 'mt-2',
-          footerPb: 'pb-32', // High lift to clear graphic clearly
-          lineHeight: 'leading-snug' // Tighter leading to prevent vertical spread
+          headerMb: 'mb-4',
+          messageSize: 'text-base', // Reduced from text-lg to text-base for Linux/Vercel safety
+          messageSpacing: 'space-y-3', // Reduced from space-y-4
+          sectionMargin: 'mb-2', // Reduced from mb-4
+          footerMargin: 'mt-1',
+          footerPb: 'pb-32', // High lift to clear graphic
+          lineHeight: 'leading-tight' // Tighter leading
       };
 
       // Very Large Group (>12)
@@ -49,7 +49,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSpacing: 'space-y-1',
           sectionMargin: 'mb-1',
           footerMargin: 'mt-1',
-          footerPb: 'pb-24', // Need space for names, can't lift too high, but text is small
+          footerPb: 'pb-24', 
           lineHeight: 'leading-tight'
       };
       
@@ -62,7 +62,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSpacing: 'space-y-2',
           sectionMargin: 'mb-2',
           footerMargin: 'mt-2',
-          footerPb: 'pb-28', // Lift up
+          footerPb: 'pb-28', 
           lineHeight: 'leading-tight'
       };
 
@@ -88,7 +88,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSpacing: 'space-y-3',
           sectionMargin: 'mb-4',
           footerMargin: 'mt-2',
-          footerPb: 'pb-32', // Safe lift
+          footerPb: 'pb-32', 
           lineHeight: 'leading-snug'
       };
   };
