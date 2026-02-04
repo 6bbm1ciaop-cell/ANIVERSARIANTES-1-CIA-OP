@@ -27,17 +27,17 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
 
   // Dynamic scaling based on count to ensure content fits
   const getScaleClasses = () => {
-      // Single Soldier
+      // Single Soldier - Adjusted to prevent overlap with footer
       if (!isCollective) return {
           nameSize: 'text-3xl',
           listSpacing: '',
-          headerMb: 'mb-6',
-          messageSize: 'text-lg', // Slightly reduced from xl for safety
-          messageSpacing: 'space-y-6',
-          sectionMargin: 'mb-6',
+          headerMb: 'mb-4', // Reduced from mb-6 to save space
+          messageSize: 'text-lg', 
+          messageSpacing: 'space-y-4', // Reduced from space-y-6 to save space
+          sectionMargin: 'mb-4', // Reduced from mb-6
           footerMargin: 'mt-2',
           footerPb: 'pb-32', // High lift to clear graphic clearly
-          lineHeight: 'leading-normal'
+          lineHeight: 'leading-snug' // Tighter leading to prevent vertical spread
       };
 
       // Very Large Group (>12)
