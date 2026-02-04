@@ -210,7 +210,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
             {/* Footer Greetings */}
             <div className="text-center px-4 mb-4">
                 {/* Reduced font size slightly to prevent wrapping on Linux/Vercel */}
-                <p className={`${count > 8 ? 'text-sm' : 'text-lg'} font-bold text-cbmmg-orange tracking-wide`}>
+                <p className={`${count > 8 ? 'text-[10px]' : 'text-sm'} font-bold text-cbmmg-orange tracking-wide`}>
                     São os votos do Corpo de Bombeiros Militar de Minas Gerais.
                 </p>
             </div>
