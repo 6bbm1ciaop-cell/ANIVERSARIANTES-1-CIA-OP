@@ -34,19 +34,19 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSize: 'text-xl',
           messageSpacing: 'space-y-6',
           sectionMargin: 'mb-6',
-          footerMargin: 'mt-6',
-          footerPb: 'pb-20'
+          footerMargin: 'mt-2',
+          footerPb: 'pb-16' // Reduced padding to prevent overlap
       };
 
       if (count > 12) return {
-          nameSize: 'text-xs',
+          nameSize: 'text-[10px]', // Slightly smaller for safety
           listSpacing: 'space-y-0.5',
           headerMb: 'mb-2',
           messageSize: 'text-sm',
           messageSpacing: 'space-y-1',
           sectionMargin: 'mb-2',
           footerMargin: 'mt-1',
-          footerPb: 'pb-20'
+          footerPb: 'pb-10'
       };
       if (count > 8) return {
           nameSize: 'text-sm',
@@ -56,7 +56,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSpacing: 'space-y-2',
           sectionMargin: 'mb-2',
           footerMargin: 'mt-2',
-          footerPb: 'pb-24'
+          footerPb: 'pb-12'
       };
       if (count > 5) return {
           nameSize: 'text-base',
@@ -65,8 +65,8 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSize: 'text-base',
           messageSpacing: 'space-y-3',
           sectionMargin: 'mb-3',
-          footerMargin: 'mt-4',
-          footerPb: 'pb-24'
+          footerMargin: 'mt-2',
+          footerPb: 'pb-14'
       };
       // Default collective (1-5 people)
       return {
@@ -76,8 +76,8 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
           messageSize: 'text-lg',
           messageSpacing: 'space-y-4',
           sectionMargin: 'mb-4',
-          footerMargin: 'mt-4',
-          footerPb: 'pb-28'
+          footerMargin: 'mt-2',
+          footerPb: 'pb-20'
       };
   };
 
@@ -128,7 +128,8 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
         <div className="flex justify-between items-start mb-4 h-28 shrink-0">
           {/* Adjusted Layout to fix overlap - Moved higher up (-mt-12) and added margin bottom (mb-3) */}
           <div className="flex flex-col pt-0 -mt-8">
-            <h1 className="text-8xl font-black text-cbmmg-orange tracking-tighter leading-none mb-3">FELIZ</h1>
+            {/* leading-[0.85] prevents font cutoff on Linux while keeping it tight */}
+            <h1 className="text-8xl font-black text-cbmmg-orange tracking-tighter leading-[0.85] mb-3">FELIZ</h1>
             <h2 className="text-3xl font-bold text-gray-500 tracking-[0.2em] ml-1">ANIVERSÁRIO</h2>
           </div>
           <div className="flex gap-4 items-start pr-2">
@@ -181,7 +182,7 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
             </div>
 
             {/* Message Body - Adjusted grammar for plural if collective */}
-            <div className={`${styles.messageSpacing} ${styles.messageSize} ${styles.sectionMargin} text-gray-700 text-justify leading-relaxed font-light px-2 pr-4 mt-4`}>
+            <div className={`${styles.messageSpacing} ${styles.messageSize} ${styles.sectionMargin} text-gray-700 text-justify leading-relaxed font-light px-2 pr-4 mt-4 break-words`}>
                 <p>
                     O Comandante da 1ª Cia. Operacional, os Oficiais e as Praças {isCollective ? 'parabenizam-nos' : 'parabenizam-no'} pela passagem de seu aniversário, {isCollective ? 'desejando-lhes' : 'desejando-lhe'} os mais sinceros votos de paz, saúde, felicidades e sucesso.
                 </p>
@@ -196,7 +197,8 @@ const BirthdayCard: React.FC<BirthdayCardProps> = ({
         <div className={`shrink-0 z-20 ${styles.footerPb} ${styles.footerMargin}`}>
             {/* Footer Greetings */}
             <div className="text-center px-4 mb-4">
-                <p className={`${count > 8 ? 'text-base' : 'text-xl'} font-bold text-cbmmg-orange tracking-wide leading-tight whitespace-nowrap`}>
+                {/* Removed whitespace-nowrap to allow breaking on wider font renderings */}
+                <p className={`${count > 8 ? 'text-base' : 'text-xl'} font-bold text-cbmmg-orange tracking-wide leading-tight`}>
                     São os votos do Corpo de Bombeiros Militar de Minas Gerais.
                 </p>
             </div>
