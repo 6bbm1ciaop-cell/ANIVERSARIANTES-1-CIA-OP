@@ -180,6 +180,14 @@ const App: React.FC = () => {
 
   const filteredSoldiersList = useMemo(() => {
     let list = getBirthdaysByMonth(soldiers, filters.month);
+    
+    // Sort by day (ascending)
+    list.sort((a, b) => {
+        const dayA = parseInt(a.birthDate.split('-')[2] || '0');
+        const dayB = parseInt(b.birthDate.split('-')[2] || '0');
+        return dayA - dayB;
+    });
+
     return filterSoldiers(list, filters.search, filters.units);
   }, [soldiers, filters]);
 
@@ -751,12 +759,13 @@ const App: React.FC = () => {
             </div>
         )}
 
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden flex-1 border border-gray-200">
-            <div className="overflow-x-auto">
+        {/* REPLACED CONTAINER: Added flex flex-col to parent, overflow-auto to child for scroll */}
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden flex-1 border border-gray-200 flex flex-col">
+            <div className="overflow-auto flex-1 custom-scrollbar relative">
                 <table className="w-full text-left">
-                    <thead className="bg-gray-50 border-b border-gray-200">
+                    <thead className="bg-gray-50 border-b border-gray-200 sticky top-0 z-10 shadow-sm">
                         <tr>
-                            <th className="p-4 w-12">
+                            <th className="p-4 w-12 bg-gray-50">
                                 <input 
                                     type="checkbox" 
                                     className="w-5 h-5 rounded text-cbmmg-red focus:ring-cbmmg-red"
@@ -764,11 +773,11 @@ const App: React.FC = () => {
                                     onChange={handleSelectAll}
                                 />
                             </th>
-                            <th className="p-4 font-bold text-gray-600">Militar</th>
-                            <th className="p-4 font-bold text-gray-600">Lotação</th>
-                            <th className="p-4 font-bold text-gray-600">Data Nasc.</th>
-                            <th className="p-4 font-bold text-gray-600">E-mail</th>
-                            <th className="p-4 font-bold text-gray-600 text-center">Ações</th>
+                            <th className="p-4 font-bold text-gray-600 bg-gray-50">Militar</th>
+                            <th className="p-4 font-bold text-gray-600 bg-gray-50">Lotação</th>
+                            <th className="p-4 font-bold text-gray-600 bg-gray-50">Data Nasc.</th>
+                            <th className="p-4 font-bold text-gray-600 bg-gray-50">E-mail</th>
+                            <th className="p-4 font-bold text-gray-600 text-center bg-gray-50">Ações</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
